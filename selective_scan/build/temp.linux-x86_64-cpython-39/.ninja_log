@@ -1,0 +1,4 @@
+# ninja log v5
+0	15613	1746703442280254611	/data/h3011109/project/mamba/VMamba/kernels/spatial_mamba_selective_scan/build/temp.linux-x86_64-cpython-39/csrc/selective_scan/cusoflexrh/selective_scan_core_fwd.o	745d0a5c096562aa
+1	19539	1746703446228204247	/data/h3011109/project/mamba/VMamba/kernels/spatial_mamba_selective_scan/build/temp.linux-x86_64-cpython-39/csrc/selective_scan/cusoflexrh/selective_scan_oflex_rh.o	1cd2a53d04ddaf98
+0	39572	1746703466219949299	/data/h3011109/project/mamba/VMamba/kernels/spatial_mamba_selective_scan/build/temp.linux-x86_64-cpython-39/csrc/selective_scan/cusoflexrh/selective_scan_core_bwd.o	e486734a6b955416
