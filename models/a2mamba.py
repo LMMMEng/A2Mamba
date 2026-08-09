@@ -988,11 +988,10 @@ def a2mamba_b(pretrained=None, pretrained_cfg=None, **args):
 
 @register_model
 def a2mamba_l(pretrained=None, pretrained_cfg=None, **args):
-    # Large model
     model = A2Mamba(
-        embed_dims=[96, 192, 448, 672],
-        depths=[4, 6, 18, 6],
-        num_heads=[4, 8, 16, 24],
+        embed_dims=[112, 224, 512, 720],
+        depths=[4, 6, 12, 6],
+        num_heads=[4, 8, 16, 30],
         window_size=[11, 9, 7, 7],
         window_dilation=[1, 1, 1, 1],
         mlp_ratios=[4, 4, 4, 4],
