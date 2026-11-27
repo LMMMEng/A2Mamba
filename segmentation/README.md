@@ -11,8 +11,7 @@ pip install openmim
 mim install mmcv-full==1.7.2
 pip install mmsegmentation==0.30.0 mmdet==2.28.2 timm==0.6.12 einops natten
 ```
-> 💡 Both the **A2Mamba backbone** and the **SegMAN-V2 decoder** require the `selective_scan_cuda_oflex_rh` CUDA extension,
-> which can be built from the `selective_scan` folder of the [A2Mamba](https://github.com/LMMMEng/A2Mamba) repository.
+💡 Both the **A2Mamba backbone** and the **SegMAN-V2 decoder** require the `selective_scan_cuda_oflex_rh` CUDA extension, which can be built from the `selective_scan` folder of the [A2Mamba](https://github.com/LMMMEng/A2Mamba) repository.
 
 💡 To enable torch>=2.1.0 to support mmcv 1.7.2, you need to make the following changes:
 
@@ -43,10 +42,10 @@ Prepare the datasets with the following folder structure:
 
 | Model | Pretrained | mIoU | config | Download |
 |:-----:|:----------:|:----:|:------:|:--------:|
-| SegMAN-V2-N | [ImageNet-1K](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/a2mamba_nano.pth) | 80.95 | [config](configs/segmanv2/segmanv2_a2mamba_nano_cityscapes_4xb4.py) | [model](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/segmanv2_a2mamba_nano_cityscapes.pth) |
-| SegMAN-V2-S | [ImageNet-1K](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/a2mamba_small.pth) | 83.82 | [config](configs/segmanv2/segmanv2_a2mamba_small_cityscapes_4xb4.py) | [model](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/segmanv2_a2mamba_small_cityscapes.pth) |
-| SegMAN-V2-B | [ImageNet-1K](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/a2mamba_base.pth) | 84.20 | [config](configs/segmanv2/segmanv2_a2mamba_base_cityscapes_4xb2.py) | [model](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/segmanv2_a2mamba_base_cityscapes.pth) |
-| SegMAN-V2-L | [ImageNet-1K](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/a2mamba_large.pth) | 84.57 | [config](configs/segmanv2/segmanv2_a2mamba_large_cityscapes_4xb4.py) | [model](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/segmanv2_a2mamba_large_cityscapes.pth) |
+| SegMAN-V2-N | [ImageNet-1K](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/a2mamba_nano.pth) | 81.0 | [config](configs/segmanv2/segmanv2_a2mamba_nano_cityscapes_4xb2.py) | [model](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/segmanv2_a2mamba_nano_cityscapes.pth) |
+| SegMAN-V2-S | [ImageNet-1K](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/a2mamba_small.pth) | 83.8 | [config](configs/segmanv2/segmanv2_a2mamba_small_cityscapes_4xb2.py) | [model](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/segmanv2_a2mamba_small_cityscapes.pth) |
+| SegMAN-V2-B | [ImageNet-1K](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/a2mamba_base.pth) | 84.2 | [config](configs/segmanv2/segmanv2_a2mamba_base_cityscapes_4xb2.py) | [model](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/segmanv2_a2mamba_base_cityscapes.pth) |
+| SegMAN-V2-L | [ImageNet-1K](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/a2mamba_large.pth) | 84.6 | [config](configs/segmanv2/segmanv2_a2mamba_large_cityscapes_4xb2.py) | [model](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/segmanv2_a2mamba_large_cityscapes.pth) |
 
 ## 5. Train
 To train A2Mamba with UperNet on ADE20K with 4 gpus, run:
@@ -55,7 +54,7 @@ bash scripts/dist_train.sh configs/upernet/upernet_a2mamba_small_ade20k_4xb4.py 
 ```
 To train A2Mamba with the SegMAN-V2 decoder on Cityscapes with 4 gpus, run:
 ```
-bash scripts/dist_train.sh configs/segmanv2/segmanv2_a2mamba_small_cityscapes_4xb4.py 4
+bash scripts/dist_train.sh configs/segmanv2/segmanv2_a2mamba_small_cityscapes_4xb2.py 4
 ```
 
 ## 6. Validation
@@ -65,7 +64,7 @@ bash scripts/dist_test.sh configs/upernet/upernet_a2mamba_small_ade20k_4xb4.py p
 ```
 To evaluate A2Mamba with the SegMAN-V2 decoder on Cityscapes, run:
 ```
-bash scripts/dist_test.sh configs/segmanv2/segmanv2_a2mamba_small_cityscapes_4xb4.py path-to-checkpoint 4 --eval mIoU
+bash scripts/dist_test.sh configs/segmanv2/segmanv2_a2mamba_small_cityscapes_4xb2.py path-to-checkpoint 4 --eval mIoU
 ```
 
 ## Citation
