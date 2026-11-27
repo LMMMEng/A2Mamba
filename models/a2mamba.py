@@ -729,6 +729,7 @@ def stem(in_chans=3, embed_dim=96):
 
 
 class A2Mamba(nn.Module):
+
     def __init__(self,
                  image_size=224,
                  in_chans=3, 
@@ -751,7 +752,7 @@ class A2Mamba(nn.Module):
                  return_features=False,
                  use_checkpoint=[0, 0, 0, 0]):
         super().__init__()
-
+        
         self.num_classes = num_classes
         self.num_layers = len(depths)
         self.embed_dim = embed_dims[0]
@@ -808,6 +809,9 @@ class A2Mamba(nn.Module):
         )
 
         self.apply(self._init_weights)
+
+        if torch.distributed.is_initialized():
+            self = nn.SyncBatchNorm.convert_sync_batchnorm(self)
 
     def _init_weights(self, m):
         if isinstance(m, (nn.Conv2d, nn.Linear)):
