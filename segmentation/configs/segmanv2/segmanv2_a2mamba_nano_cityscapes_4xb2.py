@@ -3,29 +3,29 @@ model = dict(
     type='EncoderDecoder',
     pretrained=None,
     backbone=dict(
-        type='a2mamba_l',
-        pretrained='https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/a2mamba_large.pth',
-        drop_path_rate=0.6,
+        type='a2mamba_n',
+        drop_path_rate=0.0,
         use_extra_norm=[False, False, False, False],
-        return_cls=True),
+        
+        pretrained='https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/a2mamba_nano.pth'),
     decode_head=dict(
         type='SegMANV2Decoder',
-        in_channels=[112, 224, 512, 1024],
+        in_channels=[32, 64, 128, 192],
         in_index=[0, 1, 2, 3],
-        channels=256,
-        dropout_ratio=0.15,
+        channels=128,
+        dropout_ratio=0.1,
         num_classes=19,
         norm_cfg=dict(type='SyncBN', requires_grad=True),
         align_corners=False,
         loss_decode=dict(
             type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0),
-        inner_dim=448,
+        inner_dim=192,
         use_low_level_feat=True,
-        low_level_proj_dim=32,
-        final_proj_dim=256,
+        low_level_proj_dim=16,
+        final_proj_dim=128,
         head_dim=24,
         deploy=False,
-        drop_path=0.15),
+        drop_path=0.1),
     train_cfg=dict(),
     test_cfg=dict(mode='slide', crop_size=(1024, 1024), stride=(768, 768)))
 dataset_type = 'CityscapesDataset'
@@ -68,7 +68,7 @@ test_pipeline = [
         ])
 ]
 data = dict(
-    samples_per_gpu=4,
+    samples_per_gpu=2,
     workers_per_gpu=2,
     train=dict(
         type='RepeatDataset',
@@ -165,7 +165,7 @@ optimizer = dict(
             pos_block=dict(decay_mult=0.0),
             norm=dict(decay_mult=0.0),
             head=dict(lr_mult=10.0))))
-optimizer_config = dict()
+optimizer_config = dict(type='Fp16OptimizerHook', loss_scale='dynamic')
 lr_config = dict(
     policy='poly',
     warmup='linear',
@@ -177,4 +177,5 @@ lr_config = dict(
 runner = dict(type='IterBasedRunner', max_iters=160000)
 checkpoint_config = dict(by_epoch=False, interval=4000, max_keep_ckpts=1)
 evaluation = dict(interval=4000, metric='mIoU', save_best='mIoU')
+fp16 = dict()
 auto_resume = False
