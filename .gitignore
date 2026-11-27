@@ -1,0 +1,4 @@
+selective_scan/build/
+*.egg-info/
+__pycache__/
+*.pyc
