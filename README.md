@@ -1,4 +1,4 @@
-# [A2Mamba: Attention-augmented State Space Models for Visual Recognition](https://arxiv.org/abs/2507.16624)
+# [[TPAMI 2026] A2Mamba: Attention-augmented State Space Models for Visual Recognition](https://arxiv.org/abs/2507.16624)
 
 This is an official PyTorch implementation of "[**A2Mamba: Attention-augmented State Space Models for Visual Recognition**](https://arxiv.org/abs/2507.16624)".
 
@@ -56,6 +56,8 @@ Prepare [ImageNet](https://image-net.org/) with the following folder structure, 
 | A2Mamba-Small | 224x224   | 5.4       | 31         | 84.7      | [model](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/a2mamba_small.pth) |
 | A2Mamba-Base  | 224x224   | 10.7      | 51         | 85.7      | [model](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/a2mamba_base.pth) |
 | A2Mamba-Large | 224x224   | 17.4      | 95         | 86.1      | [model](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/a2mamba_large.pth) |
+| A2Mamba-Base  | 384x384   | 34        | 51         | 86.4      | [model](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/a2mamba_base_in1k_384.pth) |
+| A2Mamba-Large | 384x384   | 54        | 95         | 86.7      | [model](https://huggingface.co/LMMM2025/A2Mamba/resolve/main/a2mamba_pretrained_weights/a2mamba_large_in1k_384.pth) |
 
 ## 4. Train
 To train ```A2Mamba``` models on ImageNet-1K with 8 gpus (single node), run:
@@ -80,14 +82,28 @@ python3 validate.py \
 --pretrained # or --checkpoint /path/to/checkpoint 
 ```
 
+# Dense Predictions
+[Object Detection](detection/)  
+[Semantic Segmentation](segmentation/)   
+
 # Citation
 If you find this project useful for your research, please consider citing:
 ```
-@article{lou2025a2mamba,
+@article{lou2026a2mamba,
   title={A2Mamba: Attention-augmented State Space Models for Visual Recognition},
   author={Lou, Meng and Fu, Yunxiang and Yu, Yizhou},
-  journal={arXiv preprint arXiv:2507.16624},
-  year={2025}
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year={2026}
+}
+```
+
+```
+@inproceedings{fu2025segman,
+  title={SegMAN: Omni-scale Context Modeling with State Space Models and Local Attention for Semantic Segmentation},
+  author={Fu, Yunxiang and Lou, Meng and Yu, Yizhou},
+  booktitle={IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={19077--19087},
+  year={2025},
 }
 ```
 
